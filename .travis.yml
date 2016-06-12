@@ -6,4 +6,5 @@ install:
   - pip install -r requirements.txt
 # command to run tests, e.g. python setup.py test
 script:
+  - pylint rxaws
   - python setup.py nosetests
