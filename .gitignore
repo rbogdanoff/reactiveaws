@@ -3,6 +3,7 @@
 # Packages
 *.eggs
 *.egg-info
+*.coverage
 dist
 build
 eggs
