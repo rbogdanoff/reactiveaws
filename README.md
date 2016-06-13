@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/rbogdanoff/reactiveaws.svg?branch=develop)](https://travis-ci.org/rbogdanoff/reactiveaws)
+[![Coveralls Coverage Status](https://img.shields.io/coveralls/rbogdanoff/reactiveaws/develop.svg)]()
 
 # reactiveaws
 An AWS interface/toolkit based on ReactiveX
