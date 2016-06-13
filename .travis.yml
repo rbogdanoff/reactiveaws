@@ -8,3 +8,6 @@ install:
 script:
   - pylint rxaws
   - python setup.py nosetests
+
+after_success:
+  - coveralls
