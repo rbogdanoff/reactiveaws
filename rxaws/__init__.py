@@ -1,3 +1,3 @@
-""" main module for rxaws """
+""" main package for rxaws """
 
 import boto
