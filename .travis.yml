@@ -6,7 +6,7 @@ install:
   - pip install -r requirements.txt
 # command to run tests, e.g. python setup.py test
 script:
-  - pylint rxaws
+  # - pylint rxaws
   - coverage run --source=rxaws setup.py nosetests
 
 after_success:
