@@ -5,6 +5,8 @@
 An AWS interface/toolkit based on ReactiveX
 ===========================================
 
+This project is in a 'building up' phase!!
+
 The goal of this project is to create a toolkit lib that will provide an interface to the AWS API using ReactiveX http://reactivex.io/ https://github.com/ReactiveX/RxPY
 
 The initial idea is provide some 'out of the box' multi-step AWS utilities that uses reactive style programming.  The 'components' used to build the 'out of the box' multi-step utils could be reused to create other AWS utilities.
