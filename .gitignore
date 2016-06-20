@@ -4,6 +4,7 @@
 *.eggs
 *.egg-info
 *.coverage
+.idea
 dist
 build
 eggs

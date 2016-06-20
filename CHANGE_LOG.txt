@@ -1,0 +1,5 @@
+06/19/2016
+
+- use boto3 instead of boto
+- add text fixtures for unit tests
+- can create test fixtures with command line 'EMIT_FIXTURES=true nosetests tests.integration'

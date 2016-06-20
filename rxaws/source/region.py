@@ -3,13 +3,14 @@
    used because we may want custom behavior in the future """
 
 from .sourcebase import SourceBase
-import boto.ec2
 
-
-class Region(SourceBase): # pylint: disable=too-few-public-methods
-    """Class that wraps a list of boto.regioninfo.RegionInfo objects """
+class Region(SourceBase):
+    """Class that wraps list of region dict objects """
     def __init__(self, region_name=None):
         super().__init__(region_name)
 
     def get_source_iterable(self):
-        return boto.ec2.regions()
+        """
+        :return: iterable of aws region dict objects
+        """
+        return self.conn.describe_regions()['Regions']

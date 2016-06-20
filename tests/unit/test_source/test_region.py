@@ -1,22 +1,33 @@
 from nose.tools import *
 from unittest import mock
 from rxaws.source.region import Region
-import boto.ec2.regioninfo as ec2
-import boto.regioninfo
+from rxaws.source.sourcebase import SourceBase
+from tests.unit.test_source.test_sourcebase import BaseClient
+import pickle
+import os
+
 
 class TestRegion:
+    fixture_file_name = os.getcwd() + '/tests/fixtures/source/test_region_source.ser'
+    fixture = pickle.load(open(fixture_file_name, "rb"))
 
-	@mock.patch('boto.ec2.regions', return_value=[ ec2.EC2RegionInfo(name='us-west-2')])
-	def setup(self, mock_return_value):
-		self.mock_return_value = mock_return_value
-		# create instance of class under test
-		self.cut_region = Region()
+    # need to mock the boto3 client
+    @mock.patch('boto3.client', return_value=(BaseClient()))
+    def setup(self,  mock_client):
+        # create instance of class under test
+        self.cut_region = Region()
 
-	def teardown(self):
-		pass
-	
-	def test_source_type(self):
-		# instance iterator should return elements of correct type
-		result = self.cut_region.get_source_iterable()[0]
-		assert isinstance(result, boto.regioninfo.RegionInfo), \
-							'expected boto.regioninfo.RegionInfo but got %s' % type(result)
+    def teardown(self):
+        pass
+
+    @mock.patch.object(Region, 'get_source_iterable', return_value=fixture)
+    def test_source_type(self, mock_region):
+        # instance iterator should return list
+        result = self.cut_region.get_source_iterable()
+        assert isinstance(result, list), \
+                          'expected list but got %s' % type(result)
+        # that contains dict elements
+        elem = result[0]
+        assert isinstance(result[0], dict), 'expected dict but got %s' % type(result)
+        # that has expected key
+        assert 'RegionName' in elem, 'key RegionName does not exist'

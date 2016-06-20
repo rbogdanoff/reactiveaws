@@ -3,14 +3,16 @@
 """
 
 from .sourcebase import SourceBase
-import boto.ec2
 
-class Ec2Instance(SourceBase): # pylint: disable=too-few-public-methods
-	"""Class that wraps a list of boto ec2 instance objects """
+class Ec2Instance(SourceBase):
+    """Class that wraps a list of ec2 dict objects  """
+    def __init__(self, region_name=None):
+        super().__init__(region_name)
 
-	def __init__(self, region_name=None):
-		super().__init__(region_name)
-
-	def get_source_iterable(self):
-		""" flatten ec2instances in each reservation """
-		return [ec2inst for reservation in self.conn.get_all_reservations() for ec2inst in reservation.instances]
+    def get_source_iterable(self):
+        """
+        :return: an iterable of ec2 instance dict objects
+        """
+        return [ec2inst
+                for reservation in self.conn.describe_instances()['Reservations']
+                for ec2inst in reservation['Instances']]
