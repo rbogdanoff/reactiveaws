@@ -1,7 +1,7 @@
 from nose.tools import *
 from unittest.mock import patch, Mock
 from rxaws.source.sourcebase import SourceBase
-from botocore.client      import BaseClient
+from botocore.client import BaseClient
 
 
 class BaseClient(Mock):
