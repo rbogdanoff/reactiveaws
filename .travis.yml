@@ -7,7 +7,7 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   # - pylint rxaws
-  - coverage run --source=rxaws setup.py nosetests
+  - coverage run --source=rxaws setup.py unittest
 
 after_success:
   - coveralls
