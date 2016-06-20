@@ -1,7 +1,6 @@
 from nose.tools import *
 from unittest.mock import patch, Mock
 from rxaws.source.sourcebase import SourceBase
-from boto.ec2.connection import EC2Connection
 from botocore.client      import BaseClient
 
 
