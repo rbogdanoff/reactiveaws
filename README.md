@@ -56,9 +56,8 @@ nosetests tests.integration
 ```
 
 ##Examples
-TODO: In the next couple of checkins I will have a couple simple examples to run that will demonstate using RxPY.
-
-However, the basic idea is that you create an RxPY observable using one of the 'sources' in rxaws/source.  For example, rxaws.source.ec2instance will return an iterable of (boto3) ec2 dict objects.  This is what will feed the RxPY observable stream.  What you can do with this stream of ec2 dict objects will be demonstrated soon.
-
+Ther are some examples of using rxaws.source interators with rx 
+Observables (in the examples directory)
+TODO: a readme with details about the examples --- comming soon
 
 

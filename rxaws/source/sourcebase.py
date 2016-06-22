@@ -14,8 +14,8 @@ class SourceBase(metaclass=ABCMeta):
         concrete subclass to pass in the iterable to wrap
         :param region_name: the aws region to connect to.  Defaults to us-east-1
         """
-        region_name = SourceBase.default_region_name if region_name is None else region_name
-        self.conn = boto3.client('ec2', region_name=region_name)
+        self.region_name = SourceBase.default_region_name if region_name is None else region_name
+        self.conn = boto3.client('ec2', region_name=self.region_name)
         self.aws_iter = None
 
     def __iter__(self):

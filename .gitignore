@@ -4,6 +4,7 @@
 *.eggs
 *.egg-info
 *.coverage
+**/.DS_Store
 .idea
 dist
 build
