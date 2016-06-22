@@ -29,3 +29,13 @@ class TestEc2Instance:
         assert isinstance(result[0], dict), 'expected dict but got %s' % type(result)
         # that has expected key
         assert 'InstanceId' in elem, 'key InstanceId does not exist'
+
+
+    # test static helper methods
+    def test_get_state(self):
+        # setup - what is the ec2 state in the first ec2 dict in the test fixture
+        test_state = TestEc2Instance.fixture[0]['State']['Name']
+        # when get_state helper method is called with an ec2 dict
+        result = Ec2Instance.get_state(TestEc2Instance.fixture[0])
+        # it should return the ec2 instance state
+        assert result == test_state, 'expected %s but got %s' % (test_state, result)

@@ -45,7 +45,7 @@ def list_instances_stopped():
     """
     print('list all ec2 instances stopped us-east-1')
     ec2_stream = Observable.from_iterable(Ec2Instance('us-east-1')) # create a stream of ec2 objects
-    ec2_stream.filter(lambda ec2 : ec2['State']['Name'] == 'stopped') \
+    ec2_stream.filter(lambda ec2 : Ec2Instance.get_state(ec2) == 'stopped') \
         .subscribe(SimpleObserver())
 
 
