@@ -15,12 +15,12 @@ from rxaws.source.ec2instance import *
 
 def test_region_source():
     # Region should return list of dict where dict has a key 'RegionName'
-    test_source((Region(), 'RegionName', sys._getframe().f_code.co_name))
+    test_source((RegionSource(), 'RegionName', sys._getframe().f_code.co_name))
     # put more tests here if needed
 
 def test_ec2instance_source():
     # Ec2Instance should return list of dict where dict has a key 'InstanceId'
-    test_source((Ec2Instance(), 'InstanceId', sys._getframe().f_code.co_name))
+    test_source((Ec2InstanceSource(), 'InstanceId', sys._getframe().f_code.co_name))
     # put more tests here if needed
 
 @nottest

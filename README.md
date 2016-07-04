@@ -56,8 +56,8 @@ nosetests tests.integration
 ```
 
 ##Examples
-Ther are some examples of using rxaws.source interators with rx 
-Observables (in the examples directory)
+There are a few examples of how to use rxpy with source and task 
+objects.  See the examples directory
 
 TODO: a readme with details about the examples --- coming soon
 

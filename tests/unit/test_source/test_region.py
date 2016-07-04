@@ -1,6 +1,6 @@
 from nose.tools import *
 from unittest import mock
-from rxaws.source.region import Region
+from rxaws.source.region import RegionSource
 from rxaws.source.sourcebase import SourceBase
 from tests.unit.test_source.test_sourcebase import BaseClient
 import pickle
@@ -15,12 +15,12 @@ class TestRegion:
     @mock.patch('boto3.client', return_value=(BaseClient()))
     def setup(self,  mock_client):
         # create instance of class under test
-        self.cut_region = Region()
+        self.cut_region = RegionSource()
 
     def teardown(self):
         pass
 
-    @mock.patch.object(Region, 'get_source_iterable', return_value=fixture)
+    @mock.patch.object(RegionSource, 'get_source_iterable', return_value=fixture)
     def test_source_type(self, mock_region):
         # instance iterator should return list
         result = self.cut_region.get_source_iterable()

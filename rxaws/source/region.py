@@ -4,7 +4,7 @@
 
 from .sourcebase import SourceBase
 
-class Region(SourceBase):
+class RegionSource(SourceBase):
     """Class that wraps list of region dict objects """
     def __init__(self, region_name=None):
         super().__init__(region_name)

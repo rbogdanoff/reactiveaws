@@ -1,6 +1,6 @@
 from nose.tools import *
 from unittest import mock
-from rxaws.source.ec2instance import Ec2Instance
+from rxaws.source.ec2instance import Ec2InstanceSource
 from tests.unit.test_source.test_sourcebase import BaseClient
 import os
 import pickle
@@ -13,12 +13,12 @@ class TestEc2Instance:
     @mock.patch('boto3.client', return_value=(BaseClient()))
     def setup(self, mock_client):
         # create instance of class under test
-        self.cut_ec2instance = Ec2Instance()
+        self.cut_ec2instance = Ec2InstanceSource()
 
     def teardown(self):
         pass
 
-    @mock.patch.object(Ec2Instance, 'get_source_iterable', return_value=fixture)
+    @mock.patch.object(Ec2InstanceSource, 'get_source_iterable', return_value=fixture)
     def test_source_type(self, mock_ec2):
         # instance iterator should return list
         result = self.cut_ec2instance.get_source_iterable()
@@ -36,6 +36,6 @@ class TestEc2Instance:
         # setup - what is the ec2 state in the first ec2 dict in the test fixture
         test_state = TestEc2Instance.fixture[0]['State']['Name']
         # when get_state helper method is called with an ec2 dict
-        result = Ec2Instance.get_state(TestEc2Instance.fixture[0])
+        result = Ec2InstanceSource.get_state(TestEc2Instance.fixture[0])
         # it should return the ec2 instance state
         assert result == test_state, 'expected %s but got %s' % (test_state, result)

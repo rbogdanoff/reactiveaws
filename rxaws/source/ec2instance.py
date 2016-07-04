@@ -4,7 +4,7 @@
 
 from .sourcebase import SourceBase
 
-class Ec2Instance(SourceBase):
+class Ec2InstanceSource(SourceBase):
     """Class that wraps a list of ec2 dict objects  """
 
     @staticmethod
@@ -18,10 +18,10 @@ class Ec2Instance(SourceBase):
         """
         return ec2_dict['State']['Name']
 
-    ## TODO: add more 'get helper' methods for commonly used attributes inside of ec2_dict
+    ## TODO: add more 'get' helper methods for commonly used attributes inside of ec2 dict
 
     def __init__(self, region_name=None):
-        super().__init__(region_name)
+        super().__init__(region_name, 'ec2')
 
     def get_source_iterable(self):
         """
