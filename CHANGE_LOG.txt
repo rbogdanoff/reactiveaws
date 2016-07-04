@@ -3,3 +3,8 @@
 - use boto3 instead of boto
 - add text fixtures for unit tests
 - can create test fixtures with command line 'EMIT_FIXTURES=true nosetests tests.integration'
+
+07/04/2016
+
+- add first tasks (task.ec2instance) - tasks can be used as subscribers to rx streams
+- add task example

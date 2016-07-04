@@ -1,5 +1,5 @@
-"""AWS Instance object source
-   This class is a 'wrapper' for the boto instance list.
+"""
+This class provides methods to do common AWS tasks
 """
 
 from .taskbase import TaskBase
@@ -28,3 +28,4 @@ class Ec2InstanceTask(TaskBase):
             Tags=tag_dict_list
         )
 
+#TODO: add many more convenience task methods and a generic way to pass any boto3 ec2 update function
