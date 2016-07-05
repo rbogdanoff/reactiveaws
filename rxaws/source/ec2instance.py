@@ -18,6 +18,17 @@ class Ec2InstanceSource(SourceBase):
         """
         return ec2_dict['State']['Name']
 
+    @staticmethod
+    def get_tags(ec2_dict):
+        """
+        Static helper method - returns the instance tags from an ec2
+        dict
+
+        :param ec2_dict: an 'ec2 dict' object.
+        :return: a list for tag dicts
+        """
+        return ec2_dict['Tags']
+
     ## TODO: add more 'get' helper methods for commonly used attributes inside of ec2 dict
 
     def __init__(self, region_name=None):

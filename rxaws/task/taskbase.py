@@ -17,3 +17,11 @@ class TaskBase(metaclass=ABCMeta):
         self.service = service
         self.conn = boto3.client(service, region_name=self.region_name)
 
+    def execute(self, func):
+        """
+        takes an ec2 boto3 function and executes it
+        :param func: a function with signature of func(conn) where conn is a boto3 connection
+        :return:
+        """
+        func(self.conn)
+

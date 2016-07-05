@@ -33,9 +33,17 @@ class TestEc2Instance:
 
     # test static helper methods
     def test_get_state(self):
-        # setup - what is the ec2 state in the first ec2 dict in the test fixture
+        # setup - what is the ec2 state in the first ec2 dict in the test fixture?
         test_state = TestEc2Instance.fixture[0]['State']['Name']
         # when get_state helper method is called with an ec2 dict
         result = Ec2InstanceSource.get_state(TestEc2Instance.fixture[0])
         # it should return the ec2 instance state
         assert result == test_state, 'expected %s but got %s' % (test_state, result)
+
+    def test_get_tags(self):
+        # setup - what are the ec2 tags in the first ec2 dict in the test fixture
+        test_tags = TestEc2Instance.fixture[0]['Tags']
+        # when get_tags helper method is called with an ec2 dict
+        result = Ec2InstanceSource.get_tags(TestEc2Instance.fixture[0])
+        # it should return the ec2 instance tags
+        assert result == test_tags, 'expected %s but got %s' % (test_tags, result)

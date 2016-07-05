@@ -11,7 +11,6 @@ class Ec2InstanceTask(TaskBase):
     def __init__(self, region_name=None):
         super().__init__(region_name, 'ec2')
 
-
     def create_tags(self, ec2_dict_list, tag_dict_list, dry_run=False):
         """
         will create tags on the ec2 instances in ec2_dict_list
@@ -21,11 +20,13 @@ class Ec2InstanceTask(TaskBase):
         :return:
         """
         # create a list of instanceIds from ec2_dict_list
-        instance_list = [inst_dict['InstanceId'] for inst_dict in ec2_dict_list ]
-        self.conn.create_tags(
-            DryRun=dry_run,
-            Resources=instance_list,
-            Tags=tag_dict_list
-        )
+        def func(conn):
+            instance_list = [inst_dict['InstanceId'] for inst_dict in ec2_dict_list ]
+            self.conn.create_tags(
+                DryRun=dry_run,
+                Resources=instance_list,
+                Tags=tag_dict_list
+            )
+        self.execute(func)
 
 #TODO: add many more convenience task methods and a generic way to pass any boto3 ec2 update function
