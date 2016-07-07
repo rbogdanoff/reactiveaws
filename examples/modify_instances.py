@@ -44,7 +44,7 @@ def add_tag_on_all_instances_in_one_region_in_batches():
     # create stream of ec2 instance dict objects
     ec2_stream = Observable.from_iterable(Ec2InstanceSource('us-east-1'))
     ec2_stream \
-        .buffer_with_count(2) \
+        .buffer_with_count(20) \
         .subscribe(on_next=lambda ec2_dict_list:ec2_task.create_tags(ec2_dict_list,
                                                    [{'Key': 'reactaws_example',
                                                      'Value': 'some_value1'}]))
