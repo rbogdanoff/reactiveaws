@@ -2,9 +2,9 @@
    This class is a 'wrapper' for the boto instance list.
 """
 
-from .sourcebase import SourceBase
+from .ec2source import Ec2Source
 
-class Ec2InstanceSource(SourceBase):
+class Ec2InstanceSource(Ec2Source):
     """Class that wraps a list of ec2 dict objects  """
 
     @staticmethod
@@ -32,12 +32,15 @@ class Ec2InstanceSource(SourceBase):
     ## TODO: add more 'get' helper methods for commonly used attributes inside of ec2 dict
 
     def __init__(self, region_name=None):
-        super().__init__(region_name, 'ec2')
+        super().__init__(region_name)
 
-    def get_source_iterable(self):
+    def execute(self):
         """
-        :return: an iterable of ec2 instance dict objects
+        :return: a list of ec2 instance dict objects
         """
-        return [ec2inst
-                for reservation in self.conn.describe_instances()['Reservations']
+        def func(conn):
+           return [ec2inst
+                for reservation in conn.describe_instances()['Reservations']
                 for ec2inst in reservation['Instances']]
+
+        return super().execute(func)

@@ -18,10 +18,10 @@ class TestEc2Instance:
     def teardown(self):
         pass
 
-    @mock.patch.object(Ec2InstanceSource, 'get_source_iterable', return_value=fixture)
+    @mock.patch.object(Ec2InstanceSource, 'execute', return_value=fixture)
     def test_source_type(self, mock_ec2):
         # instance iterator should return list
-        result = self.cut_ec2instance.get_source_iterable()
+        result = self.cut_ec2instance.execute()
         assert isinstance(result, list), \
         					'expected list but got %s' % type(result)
         # of dict elements

@@ -21,18 +21,6 @@ class SourceBase(metaclass=ABCMeta):
         self.conn = boto3.client(service, region_name=self.region_name)
         self.aws_iter = None
 
-    def __iter__(self):
-        """Returns itself as an iterable object"""
-        self.aws_iter = iter(self.get_source_iterable())
-        return self
+    def execute(self, func):
+        return func(self.conn)
 
-    def __next__(self):
-        """Returns next value of wrapped aws dict"""
-        return next(self.aws_iter)
-
-    @abstractmethod
-    def get_source_iterable(self):
-        """ concrete subclass implements this by providing aws (boto3) function
-            that will return iterable of aws object type represented by the class
-        """
-        return NotImplemented

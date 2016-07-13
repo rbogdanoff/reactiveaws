@@ -20,10 +20,10 @@ class TestRegion:
     def teardown(self):
         pass
 
-    @mock.patch.object(RegionSource, 'get_source_iterable', return_value=fixture)
+    @mock.patch.object(RegionSource, 'execute', return_value=fixture)
     def test_source_type(self, mock_region):
         # instance iterator should return list
-        result = self.cut_region.get_source_iterable()
+        result = self.cut_region.execute()
         assert isinstance(result, list), \
                           'expected list but got %s' % type(result)
         # that contains dict elements

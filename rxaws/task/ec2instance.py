@@ -2,14 +2,14 @@
 This class provides methods to do common AWS tasks
 """
 
-from .taskbase import TaskBase
+from .ec2task import Ec2Task
 
-class Ec2InstanceTask(TaskBase):
+class Ec2InstanceTask(Ec2Task):
     """Class that provides ec2 instances task execution  """
 
 
     def __init__(self, region_name=None):
-        super().__init__(region_name, 'ec2')
+        super().__init__(region_name)
 
     def create_tags(self, ec2_dict_list, tag_dict_list, dry_run=False):
         """

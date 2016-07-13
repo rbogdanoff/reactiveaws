@@ -1,6 +1,7 @@
 from rx import *
 from rxaws.source.ec2instance import *
 from rxaws.source.region import *
+from rxaws.source.ec2source import *
 
 """
 Some simple examples for using rx with AWS object streams
@@ -13,13 +14,14 @@ def main():
     list_all_instances_in_all_regions()
     list_instances_stopped()
 
+
 def list_all_instances_in_one_region():
     """
     print the ec2 instances in one region
     :return:
     """
     print('list all ec2 instances in us-east-1')
-    ec2_stream = Observable.from_iterable(Ec2InstanceSource('us-east-1')) # create a stream of ec2 objects
+    ec2_stream = Observable.from_(Ec2InstanceSource('us-east-1').execute()) # create a stream of ec2 objects
     ec2_stream.subscribe(SimpleObserver())                          # SimpleObserver will print the ec2 instances
 
 def list_all_instances_in_all_regions():
@@ -30,10 +32,10 @@ def list_all_instances_in_all_regions():
     :return:
     """
     print('list all ec2 instances in all regions')
-    region_stream = Observable.from_iterable(RegionSource())              # create a stream of region objects
+    region_stream = Observable.from_(RegionSource().execute())              # create a stream of region objects
                                                                     # and get all ec2 instances in each region
     region_stream \
-        .flat_map(lambda region : Ec2InstanceSource(region['RegionName'])) \
+        .flat_map(lambda region : Ec2InstanceSource(region['RegionName']).execute()) \
         .subscribe(on_next=lambda x: print("Got: %s" % x))
 
 def list_instances_stopped():
@@ -44,7 +46,7 @@ def list_instances_stopped():
     :return:
     """
     print('list all ec2 instances stopped us-east-1')
-    ec2_stream = Observable.from_iterable(Ec2InstanceSource('us-east-1')) # create a stream of ec2 objects
+    ec2_stream = Observable.from_(Ec2InstanceSource('us-east-1').execute()) # create a stream of ec2 objects
     ec2_stream.filter(lambda ec2 : Ec2InstanceSource.get_state(ec2) == 'stopped') \
         .subscribe(SimpleObserver())
 

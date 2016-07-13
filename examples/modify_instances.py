@@ -24,7 +24,7 @@ def add_tag_on_all_instances_in_one_region():
     ec2_task = Ec2InstanceTask('us-east-1')
 
     # create stream of ec2 instance dict objects
-    ec2_stream = Observable.from_iterable(Ec2InstanceSource('us-east-1'))
+    ec2_stream = Observable.from_(Ec2InstanceSource('us-east-1').execute())
     # for each ec2 instance, create a Tag
     ec2_stream.subscribe(on_next=lambda ec2_dict : ec2_task
                                                      .create_tags([ec2_dict],
@@ -42,7 +42,7 @@ def add_tag_on_all_instances_in_one_region_in_batches():
     ec2_task = Ec2InstanceTask('us-east-1')
 
     # create stream of ec2 instance dict objects
-    ec2_stream = Observable.from_iterable(Ec2InstanceSource('us-east-1'))
+    ec2_stream = Observable.from_(Ec2InstanceSource('us-east-1').execute())
     ec2_stream \
         .buffer_with_count(20) \
         .subscribe(on_next=lambda ec2_dict_list:ec2_task.create_tags(ec2_dict_list,

@@ -9,8 +9,11 @@ class RegionSource(SourceBase):
     def __init__(self, region_name=None):
         super().__init__(region_name)
 
-    def get_source_iterable(self):
+    def execute(self):
         """
-        :return: iterable of aws region dict objects
+        :return: list of aws region dict objects
         """
-        return self.conn.describe_regions()['Regions']
+        def func(conn):
+            return conn.describe_regions()['Regions']
+
+        return super().execute(func)

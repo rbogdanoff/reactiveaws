@@ -34,7 +34,7 @@ def test_source(spec_tuple):
     """
     # a source object should return a list of dict where the dict has
     # an expected key
-    result = next(iter(spec_tuple[0]))
+    result = spec_tuple[0].execute()[0]
     assert spec_tuple[1] in result, 'key %s does not exist' % spec_tuple[1]
     # if this test passed, emit the test data we can use it for test fixtures!!
     emit_fixture(spec_tuple)
@@ -46,7 +46,7 @@ def emit_fixture(spec_tuple):
         return
     # emit all the element of the source object to the fixtures directory
     fixture_file_name = os.getcwd() + '/tests/fixtures/source/' + spec_tuple[2] + '.ser'
-    pickle.dump([elem for elem in spec_tuple[0]], open(fixture_file_name, "wb"))
+    pickle.dump([elem for elem in spec_tuple[0].execute()], open(fixture_file_name, "wb"))
 
 
 

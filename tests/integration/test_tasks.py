@@ -17,7 +17,7 @@ from rxaws.task.ec2instance import *
 
 def test_create_ec2_tags():
     # setup - get live ec2_dict
-    ec2_dict_list = [ inst for inst in Ec2InstanceSource() ]
+    ec2_dict_list = [ inst for inst in Ec2InstanceSource().execute() ]
     # setup - create tags we will create
     timestamp = str(time.time())
     tag_dict_list = [{'Key' : 'reactawstest', 'Value' : timestamp }]
@@ -27,7 +27,7 @@ def test_create_ec2_tags():
 
     # verify
     # just check first one
-    assert (tag_dict_list[0] in next(iter(Ec2InstanceSource()))['Tags']) is True, \
+    assert (tag_dict_list[0] in Ec2InstanceSource().execute()[0]['Tags']) is True, \
         'The ec2 tags did not get created as expected'
 
 
