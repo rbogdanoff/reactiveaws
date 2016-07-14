@@ -59,6 +59,17 @@ nosetests tests.integration
 There are a few examples of how to use rxpy with source and task 
 objects.  See the examples directory
 
+TDOD: create a simple script to run the examples.  For now you need to something like...
+```bash
+$ export PYTHONPATH=.
+$ python examples/list_instances.py
+```
+Just make sure you have your AWS_SECRET_ACCESS_KEY and AWS_ACCESS_KEY_ID envs set and you are good to go
+
 TODO: a readme with details about the examples --- coming soon
+
+##Other notes.
+* will soon create a command package that will have some common commands that will be useful.  Example: a 'backupebs' command.  The commands will be configurable via a yml file and then can simply be called from the command line.
+* side project...testing.  Integration testing can be challanging as it is expensive (time and $$) to always use AWS live.  So, while something like a mockserver (http://www.mbtest.org/ for example) is useful, to have some sort of toolkit to easily create mock AWS responses quicky with little effort would be great.  Thinking about starting another project that would focus on this challange
 
 
